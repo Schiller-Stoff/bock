@@ -1,5 +1,7 @@
 package org.zim;
 
+import org.zim.validate.GAMSLocalValidator;
+
 import io.micronaut.configuration.picocli.PicocliRunner;
 import io.micronaut.context.ApplicationContext;
 
@@ -9,7 +11,7 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 @Command(name = "gamsFrontCLI", description = "...",
-        mixinStandardHelpOptions = true)
+        mixinStandardHelpOptions = true, subcommands = {GAMSLocalValidator.class})
 public class GamsFrontCLICommand implements Runnable {
 
     @Option(names = {"-v", "--verbose"}, description = "...")
