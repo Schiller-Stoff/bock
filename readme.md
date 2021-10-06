@@ -13,3 +13,19 @@ Very basic cli-tool to help setting up a gams-project on gams4+ from perspective
   - knowledge about different repositories and other implementation details.
 4. Validate:
   - integrate frontend test possiblity into the tool
+
+
+## Example cli calls
+
+```sh
+
+# calling validate subcommand
+c:; cd 'c:\Users\stoffse\Documents\Programmieren\java\gamsfront-cli'; & 'c:\Users\stoffse\.vscode\extensions\vscjava.vscode-java-debug-0.36.0\scripts\launcher.bat' 'C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot\bin\java.exe' '-Dfile.encoding=UTF-8' '@C:\Users\stoffse\AppData\Local\Temp\cp_2e9hvov2ofwsiazlht21bzn8v.argfile' 
+'org.zim.GamsFrontCLICommand' validate
+
+# calling just the main script
+c:; cd 'c:\Users\stoffse\Documents\Programmieren\java\gamsfront-cli'; & 'c:\Users\stoffse\.vscode\extensions\vscjava.vscode-java-debug-0.36.0\scripts\launcher.bat' 'C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot\bin\java.exe' '-Dfile.encoding=UTF-8' '@C:\Users\stoffse\AppData\Local\Temp\cp_2e9hvov2ofwsiazlht21bzn8v.argfile' 
+'org.zim.GamsFrontCLICommand' -v
+
+
+```
