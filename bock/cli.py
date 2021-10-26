@@ -29,5 +29,5 @@ class ComplexCLI(click.MultiCommand):
 
 @click.command(cls=ComplexCLI)
 def cli():
-    """Welcome to Bock! An all-in-one cli utility tool!"""
+    """Welcome to Bock! An all-in-one cli utility tool for GAMS development!"""
     pass
