@@ -1,13 +1,13 @@
 
 import click
+from bock.service.gams_local import GamsLocal
 
 # Base Setup
 #
 # class definition is needed for external data and basic setup here
 class Context:
     def __init__(self):
-        # self.note = svc_note.Note()
-        pass
+        self.gams_local = GamsLocal()
 
 # assign defined context to command initialization.
 @click.group()
@@ -27,3 +27,8 @@ def cli(ctx):
 def setup(ctx):
   """ Setup a gams4+ project for your local gams."""
   click.echo("This is a test!")
+  default_root = ctx.obj.gams_local.verify_rootfolder()
+  if default_root:
+    click.echo("Default root folder detected. You are the best!")
+  else:
+    click.echo("IDIOT!")
