@@ -3,6 +3,26 @@
 
 Very basic cli-tool to help setting up a gams-project on gams4+ from perspective of frontend-development.
 
+
+## Quick Start
+
+```sh
+# cd to clone of repo
+cd /to/the/clone
+
+# install via pip locally
+pip install .
+
+# launch bock commands
+bock [cmd]
+
+```
+
+## Idols / Sources
+- https://github.com/IVIURRAY/yt-eve
+- https://www.youtube.com/watch?v=Jr4QDJwwj60&ab_channel=SoftwareEngineerHaydn
+
+
 ## Requirements
 - python 3.10.0?
 
