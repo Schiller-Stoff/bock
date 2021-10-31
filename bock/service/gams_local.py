@@ -4,7 +4,7 @@ from pathlib import Path
 
 class GamsLocal:
   def __init__(self) -> None:
-      self.default_gamslocal = "gams-local"
+      self.default_gamslocal = "gams-locale"
       self.home_path = str(Path.home())
       self.gamslocal_path = self.get_gamslocal_root()
 
@@ -19,5 +19,8 @@ class GamsLocal:
     Retrieves Path representation of gams-local folder.
     """
     exp_gamslocal_path = Path( self.home_path + os.sep + self.default_gamslocal )
-    self.verify_rootfolder(exp_gamslocal_path=exp_gamslocal_path)
+    is_default = self.verify_rootfolder(exp_gamslocal_path=exp_gamslocal_path)
+    if not is_default:
+      raise NotADirectoryError("gams-local dir not available at user home!")
+    
     return exp_gamslocal_path
