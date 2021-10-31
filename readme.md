@@ -16,6 +16,10 @@ pip install .
 # launch bock commands
 bock [cmd]
 
+# launch demo sub-command (inside commands/demo.py)
+bock demo testme
+
+
 ```
 
 ## Idols / Sources
