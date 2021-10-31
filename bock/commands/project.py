@@ -27,8 +27,5 @@ def cli(ctx):
 def setup(ctx):
   """ Setup a gams4+ project for your local gams."""
   click.echo("This is a test!")
-  default_root = ctx.obj.gams_local.verify_rootfolder()
-  if default_root:
-    click.echo("Default root folder detected. You are the best!")
-  else:
-    click.echo("IDIOT!")
+  default_root = ctx.obj.gams_local.get_gamslocal_root()
+  print(str(default_root))
