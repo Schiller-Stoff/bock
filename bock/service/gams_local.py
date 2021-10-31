@@ -4,7 +4,7 @@ from pathlib import Path
 
 class GamsLocal:
   def __init__(self) -> None:
-      self.default_gamslocal = "gams-locale"
+      self.default_gamslocal = "gams-local"
       self.home_path = str(Path.home())
       self.gamslocal_path = self.get_gamslocal_root()
 
