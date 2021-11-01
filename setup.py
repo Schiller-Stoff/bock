@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 setup(
     author="Sebastian Stoff",
     author_email="SebastianStoff@gmx.at",
-    description="Small clit - tool to support GAMS4+ local development",
+    description="Small cli - tool to support GAMS4+ local development",
     long_description=long_description,
     long_description_content_type="text/markdown",
     name='bock',
