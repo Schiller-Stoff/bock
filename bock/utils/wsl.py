@@ -3,6 +3,7 @@ from platform import uname
 import shutil
 import os
 import subprocess
+from typing import Tuple
 
 class WSL:
   """
@@ -64,4 +65,15 @@ class WSL:
     cmd = 'wslpath "$(wslvar USERPROFILE)"'
     win_mnt_home = subprocess.check_output(cmd, shell=True, text=True)
     return Path(win_mnt_home)
+
+  @staticmethod
+  def analyze_wsl_home_path(wsl_win_home: Path) -> str:
+    """
+    Takes in Path representation of the mounted windows home path and extracts the windows username.
+    :param wsl_win_home Path representation of the mounted windows home
+    
+    """
+    as_string = str(wsl_win_home)
+    split = as_string.split(os.sep)
+    return split[len(split)-1]
     
