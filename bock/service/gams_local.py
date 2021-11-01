@@ -5,7 +5,9 @@ from bock.utils.wsl import WSL
 
 class GamsLocal:
   def __init__(self) -> None:
+    # will thow NotImplementedError outside wsl.
     self.check_wsl_active()
+
     self.default_gamslocal = "gams-local"
     # self.home_path = str(Path.home())
     # self.gamslocal_path = self.get_gamslocal_root()
@@ -24,13 +26,13 @@ class GamsLocal:
       else:
         raise NotImplementedError("Running bock ouside wsl is currently not supported. WSL seems not to be installed")
   
-  def verify_rootfolder(self, exp_gamslocal_path: Path) -> bool:
+  def win_verify_rootfolder(self, exp_gamslocal_path: Path) -> bool:
     """
     Method checks if the default wsl root-folder is correctly setup.
     """
     return Path.exists(exp_gamslocal_path) and Path.is_dir(exp_gamslocal_path)
 
-  def get_gamslocal_root(self) -> Path:
+  def win_get_gamslocal_root(self) -> Path:
     """
     Retrieves Path representation of gams-local folder.
     """
