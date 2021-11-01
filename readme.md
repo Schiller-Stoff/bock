@@ -51,6 +51,14 @@ sudo apt install python3-pip
 3. code along!
 
 
+### Update bock
+
+```sh
+# update bock
+py -m pip install --upgrade bock
+
+```
+
 ## Aims
 
 1. Simplify
@@ -69,3 +77,27 @@ sudo apt install python3-pip
 
 
 ```
+
+# Production
+
+- according to official doc here: https://packaging.python.org/tutorials/installing-packages/#installing-requirements
+
+- based on windows machines
+
+```sh
+# launch venv first
+# cd into clone
+./venv/Scripts/activate.bat
+
+# build python wheel
+py -m build --wheel
+
+# OPTIONAL: check if description is valid
+twine check dist/*
+
+
+
+```
+
+
+# Deyployment
