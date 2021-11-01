@@ -63,7 +63,7 @@ class WSL:
       EnvironmentError("Trying to get mounted windows-home without active wsl environment.")
 
     cmd = 'wslpath "$(wslvar USERPROFILE)"'
-    win_mnt_home = subprocess.check_output(cmd, shell=True, text=True)
+    win_mnt_home = subprocess.check_output(cmd, shell=True, text=True).strip().replace(" ", "")
     return Path(win_mnt_home)
 
   @staticmethod
@@ -71,7 +71,7 @@ class WSL:
     """
     Takes in Path representation of the mounted windows home path and extracts the windows username.
     :param wsl_win_home Path representation of the mounted windows home
-    
+
     """
     as_string = str(wsl_win_home)
     split = as_string.split(os.sep)
