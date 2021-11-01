@@ -23,7 +23,7 @@ class GamsLocal:
     else:
       # check if wsl would be available  
       if WSL.win_wsl_available():
-        raise NotImplementedError("Running bock ouside wsl is currently not supported, but WSL seems to be installed. Type 'wsl' in your cmd and start bock from there!")
+        raise NotImplementedError("Running bock ouside wsl is currently not supported but WSL seems to be installed. Type 'wsl' in your cmd and start bock from there!")
       else:
         raise NotImplementedError("Running bock ouside wsl is currently not supported. WSL seems not to be installed")
   
