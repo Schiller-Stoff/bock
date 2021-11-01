@@ -29,6 +29,19 @@ bock demo testme
 
 ## Requirements
 - python 3.10.0?
+- pip installed
+
+
+### 1. Install pip (WSL + Ubuntu 20.x LTS)
+```sh
+# pip wsl ubuntu installation
+# update / upgrade ubuntu first
+sudo apt update && sudo apt upgrade
+# install pip on ubuntu
+sudo apt install python3-pip
+
+
+```
 
 ## Install
 
