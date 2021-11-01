@@ -10,8 +10,8 @@ class GamsLocal:
     self.win_home_path = WSL.get_wslwinhome()
     self.win_usr_name = WSL.analyze_wsl_home_path(self.win_home_path)
     self.default_gamslocal = "gams-local"
-    # self.home_path = str(Path.home())
-    # self.gamslocal_path = self.get_gamslocal_root()
+    # will throw an error if the expected folder is not available
+    self.gamslocal_path = self.win_get_gamslocal_root()
 
   def check_wsl_active(self) -> True:
     """
@@ -30,6 +30,8 @@ class GamsLocal:
   def win_verify_rootfolder(self, exp_gamslocal_path: Path) -> bool:
     """
     Method checks if the default wsl root-folder is correctly setup.
+    :param exp_gamslocal_path Path of expected gams-local location on the system.
+
     """
     return Path.exists(exp_gamslocal_path) and Path.is_dir(exp_gamslocal_path)
 
@@ -37,9 +39,11 @@ class GamsLocal:
     """
     Retrieves Path representation of gams-local folder.
     """
-    exp_gamslocal_path = Path( self.home_path + os.sep + self.default_gamslocal )
-    is_default = self.verify_rootfolder(exp_gamslocal_path=exp_gamslocal_path)
+
+    win_home_str = str(self.win_home_path)
+    exp_gamslocal_path = Path( win_home_str + os.sep + self.default_gamslocal )
+    is_default = self.win_verify_rootfolder(exp_gamslocal_path=exp_gamslocal_path)
     if not is_default:
-      raise NotADirectoryError("gams-local dir not available at user home!")
+      raise NotADirectoryError("gams-local dir not available at user home! Checked for path: ", str(exp_gamslocal_path))
     
     return exp_gamslocal_path
