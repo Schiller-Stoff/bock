@@ -78,11 +78,13 @@ py -m pip install --upgrade bock
 
 ```
 
-# Production
+# Production / Packaging
 
-- according to official doc here: https://packaging.python.org/tutorials/installing-packages/#installing-requirements
+- according to official doc here: https://packaging.python.org/guides/distributing-packages-using-setuptools/#packaging-your-project
 
 - based on windows machines
+
+- packaged as "wheel" (check doc link from before)
 
 ```sh
 # launch venv first
@@ -95,9 +97,9 @@ py -m build --wheel
 # OPTIONAL: check if description is valid
 twine check dist/*
 
-
-
 ```
 
 
-# Deyployment
+# Deployment (on pypi)
+
+- on pypi https://packaging.python.org/guides/distributing-packages-using-setuptools/#uploading-your-project-to-pypi
