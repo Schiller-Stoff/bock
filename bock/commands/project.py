@@ -29,5 +29,5 @@ def setup(ctx):
   """ Setup a gams4+ project for your local gams."""
 
   click.echo("NICE")
-  # default_root = ctx.obj.gams_local.get_gamslocal_root()
-  # print(str(default_root))
+  default_root = ctx.obj.gams_local.win_get_gamslocal_root()
+  print("This is the root: ",str(default_root))
