@@ -103,3 +103,12 @@ twine check dist/*
 # Deployment (on pypi)
 
 - on pypi https://packaging.python.org/guides/distributing-packages-using-setuptools/#uploading-your-project-to-pypi
+
+- check docu for api token (test out on testpypi)
+
+```sh
+# test on testpypi
+# need to specify testpypi repo
+twine upload dist/* --repository testpypi
+
+```
