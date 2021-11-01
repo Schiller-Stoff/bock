@@ -12,6 +12,7 @@ cd /to/the/clone
 
 # install via pip locally
 pip install .
+# logout / login from wsl afterwards
 
 # launch bock commands
 bock [cmd]
@@ -39,7 +40,7 @@ bock demo testme
 sudo apt update && sudo apt upgrade
 # install pip on ubuntu
 sudo apt install python3-pip
-
+# then install bock
 
 ```
 
