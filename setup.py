@@ -8,11 +8,15 @@ def read_requirements():
 
     return requirements
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(
     author="Sebastian Stoff",
     author_email="SebastianStoff@gmx.at",
     description="Small clit - tool to support GAMS4+ local development",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     name='bock',
     version='0.1.0',
     packages=find_packages(exclude=("tests")),
