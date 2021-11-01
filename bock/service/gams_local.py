@@ -7,7 +7,8 @@ class GamsLocal:
   def __init__(self) -> None:
     # will thow NotImplementedError outside wsl.
     self.check_wsl_active()
-
+    self.win_home_path = WSL.get_wslwinhome()
+    self.win_usr_name = WSL.analyze_wsl_home_path(self.win_home_path)
     self.default_gamslocal = "gams-local"
     # self.home_path = str(Path.home())
     # self.gamslocal_path = self.get_gamslocal_root()
