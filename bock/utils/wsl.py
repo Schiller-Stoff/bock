@@ -1,3 +1,4 @@
+from pathlib import Path
 from platform import uname
 import shutil
 import os
@@ -12,6 +13,7 @@ class WSL:
   def __init__(self) -> None:
       pass
 
+  @staticmethod
   def in_wsl() -> bool:
     """
     Checks if the script is executed out of WSL context or not. 
@@ -22,7 +24,7 @@ class WSL:
 
     return 'microsoft' in uname().release
 
-
+  @staticmethod
   def win_wsl_available() -> bool:
     """
     heuristic to detect if Windows Subsystem for Linux is available.
@@ -42,3 +44,24 @@ class WSL:
         return ret.returncode == 0
 
     return False
+
+  @staticmethod
+  def get_wslwinhome() -> Path:
+    """
+    Returns the current user's wsl mounted home directory as Path. 
+    Only works on Ubuntu 20.x or higher. 
+    Might be somewhat performance intense
+
+    Command used:
+    wslpath "$(wslvar USERPROFILE)"
+    see: https://superuser.com/questions/1271205/how-to-get-the-host-user-home-directory-in-wsl-bash
+    https://stackoverflow.com/questions/4760215/running-shell-command-and-capturing-the-output
+
+    """
+    if not WSL.in_wsl():
+      EnvironmentError("Trying to get mounted windows-home without active wsl environment.")
+
+    cmd = 'wslpath "$(wslvar USERPROFILE)"'
+    win_mnt_home = subprocess.check_output(cmd, shell=True, text=True)
+    return Path(win_mnt_home)
+    
