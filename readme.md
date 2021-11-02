@@ -6,6 +6,8 @@ Very basic cli-tool to help setting up a gams-project on gams4+ from perspective
 
 ## Quick Start
 
+### Windows
+
 ```sh
 # cd to clone of repo
 cd /to/the/clone
@@ -22,6 +24,30 @@ bock demo testme
 
 
 ```
+
+
+### WSL / Linux
+
+```sh
+# cd to clone of repo
+cd /to/the/clone
+
+# activate venv (needs virtualenv installed)
+source venv/Scripts/activate    # if there is an error (like command not found -> use dos2Unix command on venv/Scripts/activate )
+
+# install via pip locally
+pip install .
+# logout / login from wsl afterwards
+
+# launch bock commands
+bock [cmd]
+
+# launch demo sub-command (inside commands/demo.py)
+bock demo testme
+
+
+```
+
 
 ## Idols / Sources
 - https://github.com/IVIURRAY/yt-eve
