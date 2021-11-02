@@ -111,12 +111,17 @@ twine check dist/*
 # need to specify testpypi repo
 twine upload dist/* --repository testpypi
 
+# install from testpypi
+# needs to be done this way -> deps need to be installed from pypi and not the test instance.
+pip install bock --extra-index-url https://test.pypi.org/simple 
+
+
 ```
 
 
 # Testing
 
-## Manual 
+## Manual Deployment
 
 - installing from test-pypi
 
