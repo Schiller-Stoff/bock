@@ -76,4 +76,16 @@ class WSL:
     as_string = str(wsl_win_home)
     split = as_string.split(os.sep)
     return split[len(split)-1]
+
+  @staticmethod
+  def check_for_ubuntu20_lts() -> bool:
+    """
+    Checks if Ubuntu 20.x LTS is being used in the executing environment.
+    Will return false if a different version or distro is being used.
+    :returns boolean If Ubuntu 20.x.x LTS is being used.
+    """
+    cmd = 'cat /etc/lsb-release'
+    ret = subprocess.check_output(cmd, shell=True, text=True).strip().lower()
+    return ('ubuntu 20.' in ret) and ('lts' in ret) 
+
     
