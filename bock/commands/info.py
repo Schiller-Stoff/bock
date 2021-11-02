@@ -1,6 +1,7 @@
 
 import click
 import platform
+from bock.utils.wsl import WSL
 
 # Base Setup
 #
@@ -27,11 +28,12 @@ def cli(ctx):
 @click.pass_context
 def system(ctx):
   """
-  Provides 
+  Provides basic info about the executing context of bock. 
   """
   click.echo(f"Running system: {platform.system()}")
   click.echo(f"OS-release: {platform.release()}")
   click.echo(f"Uname: {platform.uname()}")
   click.echo(f"Machine type: {platform.machine()}")
   click.echo(f"Network-node: {platform.node()}")
-  click.echo(f"Uing python version: {platform.python_version()}")
+  click.echo(f"Using python version: {platform.python_version()}")
+  click.echo(f"Ubuntu LTS 20.x being used as current distro in wsl: {'YES' if WSL.check_for_ubuntu20_lts() else '!NO! (Bock will only run under Ubuntu 20.x LTS)'}")
