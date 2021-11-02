@@ -1,5 +1,6 @@
 
 import click
+from click.termui import prompt
 from bock.service.gams_local import GamsLocal
 from bock.utils.wsl import WSL
 
@@ -25,9 +26,13 @@ def cli(ctx):
 # first real command in subcommand
 @cli.command()
 @click.pass_context
-def setup(ctx):
-  """ Setup a gams4+ project for your local gams."""
-
+@click.argument('project_abbr')
+def setup(ctx, project_abbr):
+  """ 
+    Setup a gams4+ project for your local gams.\n
+    :param project_abbr ZIM/GAMS project abbreviation as used in zimlab and auth.
+  """
   click.echo("NICE")
+  click.echo(project_abbr)
   default_root = ctx.obj.gams_local.win_get_gamslocal_root()
   print("This is the root: ",str(default_root))
