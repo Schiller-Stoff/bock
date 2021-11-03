@@ -1,8 +1,6 @@
 
 import click
-from click.termui import prompt
 from bock.service.gams_local import GamsLocal
-from bock.utils.wsl import WSL
 from bock.service.zimlab import ZIMLab
 
 # Base Setup
