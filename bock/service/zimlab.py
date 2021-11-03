@@ -16,7 +16,10 @@ class ZIMLab:
   @staticmethod
   def clone_project_www(project_abbr: str, clone_loc: str):
     """
-    
+    Takes in the convention-enforced project-abbr and clones from zimlab accordingly into requested folder.
+    Clones into a folder with the name of given project-abbr.
+    :param project_abbr Abbrevation of the GAMS project done at ZIM Graz.
+    :param clone_loc dir to which the project gams-www should be checked out. 
     """
 
     if not Path.is_dir(Path(clone_loc)): raise NotADirectoryError(f"Given Path is not a directory. Given path: {clone_loc}") 
