@@ -13,7 +13,9 @@ class GamsLocal:
         self.win_usr_name = WSL.analyze_wsl_home_path(self.win_home_path)
         self.default_gamslocal = "gams-local"
         # will throw an error if the expected folder is not available
-        self.gamslocal_path = self.win_get_gamslocal_root()
+        self.gamslocal_path = self._win_get_gamslocal_root()
+        # apache dir (where projects / assets / etc. are)
+        self.gamslocal_apache = self._getwsl_apache_gamslocal(self.gamslocal_path)
 
     def check_wsl_active(self) -> True:
         """
@@ -49,7 +51,7 @@ class GamsLocal:
             raise NotImplementedError(
                 "Running bock outside ubuntu 20.x LTS is currently not supported. Please make sure to run Ubuntu 20.x as your distro.")
 
-    def win_get_gamslocal_root(self) -> Path:
+    def _win_get_gamslocal_root(self) -> Path:
         """
         Retrieves Path representation of gams-local folder.
         """
@@ -64,3 +66,14 @@ class GamsLocal:
                 "gams-local dir not available at user home! Checked for path: ", str(exp_gamslocal_path))
 
         return exp_gamslocal_path
+
+    def _getwsl_apache_gamslocal(self, gamslocal_path: Path):
+        """
+        Takes in the Path representation of the gams_local directory.
+        Returns the expected location of the apache directory.
+        """
+        apache_path = Path(str(gamslocal_path) + os.sep + "gams-data" + os.sep + "apache")
+        if not Path.is_dir(apache_path):
+            raise NotADirectoryError("There appears to be no gams-data/apache in your gams-local directory. Please rerun the initial setup.sh. Got gams_local path: ", str(gamslocal_path))
+
+        return Path(str(self.gamslocal_path) + os.sep + "gams-data" + os.sep + "apache")
