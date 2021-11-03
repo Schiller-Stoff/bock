@@ -3,6 +3,7 @@ import click
 from click.termui import prompt
 from bock.service.gams_local import GamsLocal
 from bock.utils.wsl import WSL
+from bock.service.zimlab import ZIMLab
 
 # Base Setup
 #
@@ -32,7 +33,10 @@ def setup(ctx, project_abbr):
     Setup a gams4+ project for your local gams.\n
     :param project_abbr ZIM/GAMS project abbreviation as used in zimlab and auth.
   """
-  click.echo("NICE")
-  click.echo(project_abbr)
-  default_root = ctx.obj.gams_local.win_get_gamslocal_root()
-  print("This is the root: ",str(default_root))
+  click.echo(f"Initializing project for: {project_abbr}")
+  click.echo(f"Found gams-local root at: {str(ctx.obj.gams_local.gamslocal_path)}")
+  click.echo(f"Found apache dir at: {str(ctx.obj.gams_local.gamslocal_apache)}")
+
+  # cloning project from zimlab 
+  ZIMLab.clone_project_www(project_abbr=project_abbr, clone_loc=str(ctx.obj.gams_local.gamslocal_apache))
+  click.echo(f"Succesfully cloned project {project_abbr} from zimlab to: {str(ctx.obj.gams_local.gamslocal_apache)}")
