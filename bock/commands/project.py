@@ -39,3 +39,13 @@ def setup(ctx, project_abbr):
   GamsLocal.assert_project_abbr(project_abbr)
   ZIMLab.clone_project_www(project_abbr=project_abbr, clone_loc=str(ctx.obj.gams_local.gamslocal_apache))
   click.echo(f"Succesfully cloned project {project_abbr} from zimlab to: {str(ctx.obj.gams_local.gamslocal_apache)}")
+
+@cli.command()
+@click.pass_context
+def repair(ctx):
+  """
+  DANGEROUS! Will convert all files inside the apache folder from dos to unix line-endings.
+  Might mess with files in the apache folder.
+  """
+  click.echo("Repairing files...")
+  ctx.obj.gams_local.dos2unix_apache_folder()
