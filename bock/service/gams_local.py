@@ -134,7 +134,6 @@ class GamsLocal:
             try:
                 text = open(filename, 'r').read().replace('\r\n', '\n')
                 open(filename, 'w').write(text)
+                print("**dos2unix on file**: ", filename)
             except UnicodeDecodeError as e:
                 pass
-            finally:
-                print("**dos2unix on file**: ", filename)
