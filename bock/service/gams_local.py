@@ -15,7 +15,8 @@ class GamsLocal:
         # will throw an error if the expected folder is not available
         self.gamslocal_path = self._win_get_gamslocal_root()
         # apache dir (where projects / assets / etc. are)
-        self.gamslocal_apache = self._getwsl_apache_gamslocal(self.gamslocal_path)
+        self.gamslocal_apache = self._getwsl_apache_gamslocal(
+            self.gamslocal_path)
 
     def check_wsl_active(self) -> True:
         """
@@ -72,8 +73,50 @@ class GamsLocal:
         Takes in the Path representation of the gams_local directory.
         Returns the expected location of the apache directory.
         """
-        apache_path = Path(str(gamslocal_path) + os.sep + "gams-data" + os.sep + "apache")
+        apache_path = Path(str(gamslocal_path) + os.sep +
+                           "gams-data" + os.sep + "apache")
         if not Path.is_dir(apache_path):
-            raise NotADirectoryError("There appears to be no gams-data/apache in your gams-local directory. Please rerun the initial setup.sh. Got gams_local path: ", str(gamslocal_path))
+            raise NotADirectoryError(
+                "There appears to be no gams-data/apache in your gams-local directory. Please rerun the initial setup.sh. Got gams_local path: ", str(gamslocal_path))
 
         return Path(str(self.gamslocal_path) + os.sep + "gams-data" + os.sep + "apache")
+
+    @staticmethod
+    def assert_project_abbr(project_abbr: str) -> None:
+        """
+        Takes in the GAMS project abbrevation and throws an AssertionError when project_abbr has a forbidden value.
+        Check the intern forbidden array for details.
+        :param project_abbr project abbreviation as chosen on zimlab.
+        """
+
+        forbidden = ["3dhop",
+                     "cirilo.properties",
+                     "cm4f.org",
+                     "config",
+                     "css",
+                     "doc",
+                     "editionviewer",
+                     "errors",
+                     "icons",
+                     "keycloak",
+                     "lido",
+                     "mei",
+                     "mets",
+                     "mirador",
+                     "mirador-plugins",
+                     "models",
+                     "openapi",
+                     "osdviewer",
+                     "platin",
+                     "rtiviewer",
+                     "schemes",
+                     "storymap",
+                     "tei",
+                     "verovio",
+                     "viewer",
+                     "xsl",
+                     "xsl-tokenizer"
+                     ]
+
+        if project_abbr in forbidden:
+            raise AssertionError(f"Chosen project abbreviation is forbidden. Forbidden values are: {str(forbidden)}")
