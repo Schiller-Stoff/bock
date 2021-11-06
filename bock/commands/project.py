@@ -36,5 +36,6 @@ def setup(ctx, project_abbr):
   click.echo(f"Found apache dir at: {str(ctx.obj.gams_local.gamslocal_apache)}")
 
   # cloning project from zimlab 
+  GamsLocal.assert_project_abbr(project_abbr)
   ZIMLab.clone_project_www(project_abbr=project_abbr, clone_loc=str(ctx.obj.gams_local.gamslocal_apache))
   click.echo(f"Succesfully cloned project {project_abbr} from zimlab to: {str(ctx.obj.gams_local.gamslocal_apache)}")
