@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 from bock.utils.wsl import WSL
-
+import glob
 
 class GamsLocal:
     def __init__(self) -> None:
@@ -121,3 +121,20 @@ class GamsLocal:
 
         if project_abbr in forbidden:
             raise AssertionError(f"Chosen project abbreviation is forbidden. Will cause conflicts when going to production. Forbidden values are: {str(forbidden)}")
+
+    def dos2unix_apache_folder(self):
+        """
+        Method tries to convert all files inside the local apache folder. From \r\n to \n. 
+        Will only work on files with "textual" data.  
+        """
+        for filename in glob.iglob(str(self.gamslocal_apache) + '**/**', recursive=True):
+            if not Path.is_file(Path(filename)):
+                continue
+
+            try:
+                text = open(filename, 'r').read().replace('\r\n', '\n')
+                open(filename, 'w').write(text)
+            except UnicodeDecodeError as e:
+                pass
+            finally:
+                print("**dos2unix on file**: ", filename)
