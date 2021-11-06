@@ -44,7 +44,8 @@ def setup(ctx, project_abbr):
 @click.pass_context
 def repair(ctx):
   """
-  DANGEROUS! Will convert all files inside the apache folder from dos to unix line-endings.
+  DANGEROUS! Removes all dos line-endings inside /apache files.
+  Will convert all files inside the apache folder from dos to unix line-endings.
   Might mess with files in the apache folder.
   """
   if click.confirm('Transform dos line-endings maybe causing problems inside your /apache ?'):
