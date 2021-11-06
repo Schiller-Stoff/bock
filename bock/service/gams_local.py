@@ -106,6 +106,7 @@ class GamsLocal:
                      "mirador-plugins",
                      "models",
                      "openapi",
+                     "osd",
                      "osdviewer",
                      "platin",
                      "rtiviewer",
@@ -119,4 +120,4 @@ class GamsLocal:
                      ]
 
         if project_abbr in forbidden:
-            raise AssertionError(f"Chosen project abbreviation is forbidden. Forbidden values are: {str(forbidden)}")
+            raise AssertionError(f"Chosen project abbreviation is forbidden. Will cause conflicts when going to production. Forbidden values are: {str(forbidden)}")
