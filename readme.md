@@ -149,14 +149,23 @@ pip install bock --extra-index-url https://test.pypi.org/simple
 
 ## Manual Deployment
 
-- installing from test-pypi
+### Installation from TestPypi
 
 ```sh
+
+# first update ubuntu stuff
+sudo apt-get update && apt-get upgrade 
+
+# install pip first
+sudo apt-get python3-pip
 
 # install from testpypi
 # needs to be done this way -> deps need to be installed from pypi and not the test instance.
 pip install bock --extra-index-url https://test.pypi.org/simple 
+# (when on wsl -> restart wsl )
 
+# use bock
+bock project setup "templates"
 
 
 ```
