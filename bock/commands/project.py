@@ -47,5 +47,6 @@ def repair(ctx):
   DANGEROUS! Will convert all files inside the apache folder from dos to unix line-endings.
   Might mess with files in the apache folder.
   """
-  click.echo("Repairing files...")
-  ctx.obj.gams_local.dos2unix_apache_folder()
+  if click.confirm('Transform dos line-endings maybe causing problems inside your /apache ?'):
+    ctx.obj.gams_local.dos2unix_apache_folder()
+  
