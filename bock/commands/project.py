@@ -40,6 +40,10 @@ def setup(ctx, project_abbr):
   ZIMLab.clone_project_www(project_abbr=project_abbr, clone_loc=str(ctx.obj.gams_local.gamslocal_apache))
   click.echo(f"Succesfully cloned project {project_abbr} from zimlab to: {str(ctx.obj.gams_local.gamslocal_apache)}")
 
+  # copy over gams-templates files.
+  if click.confirm("Do you want to copy over gams-project templates files to your project folder? (Will stop if there are already xslt-files inside your local clone)"):
+    ZIMLab.copy_templates_www(project_abbr, str(ctx.obj.gams_local.gamslocal_apache))
+
 @cli.command()
 @click.pass_context
 def repair(ctx):
