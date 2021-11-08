@@ -55,12 +55,10 @@ class ZIMLab:
 
     # create a temporary directory using the context manager
     with tempfile.TemporaryDirectory() as tmpdirpath:
-      print('created temporary directory: ', tmpdirpath)
 
-      # clone files to temp-dir
       ZIMLab.clone_project_www("templates", tmpdirpath)
 
-      # copy subdirectory
+      # copy from tmp to apache/PROJECT_ABBR
       fromDirectory = tmpdirpath + os.sep + "templates"
       toDirectory = clone_loc + os.sep + project_abbr
 
@@ -80,14 +78,15 @@ class ZIMLab:
           destination = toDirectory + os.sep + file_name.replace("project", project_abbr)
 
           if os.path.isfile(source):
+            # Move to own method!
+            # adapts temp files to specific project setup
+            ZIMLab._adapt_temp_template_files(file_name, source, project_abbr)
             shutil.copy(source, destination)
-            print('copied file: ', destination)
-
-            # open files and adapt to project setup?
+            print('Created file: ', destination)
 
           else:
             copytree(source, destination)
-            print("copied dir: ", destination)
+            print("Created dir: ", destination)
 
   
   @staticmethod
@@ -104,3 +103,21 @@ class ZIMLab:
         return True
     
     return False
+
+  @staticmethod
+  def _adapt_temp_template_files(file_name: str, source: str, project_abbr: str):
+    """
+    Changes xslt gams project template files according to project abbreviation. Like renaming file
+    (from project-static.xsl to MYABBR-static.xsl) and changing xsl file contents.
+    :param file_name name of file to be changed.
+    :source path of source files
+    :project_abbr convention based project abbreviation of the gams proect
+    """
+    # open files and adapt to project setup?
+    if "static.xsl" in file_name:
+        text = open(source, 'r').read().replace('<xsl:variable name="projectAbbr">template</xsl:variable>', f'<xsl:variable name="projectAbbr">{project_abbr}</xsl:variable>')
+        open(source, 'w').write(text)
+
+    if ("object.xsl" in file_name) or ("context.xsl" in file_name) or ("search.xsl" in file_name):
+        text = open(source, 'r').read().replace('<xsl:include href="project-static.xsl"/>', f'<xsl:include href="{project_abbr}-static.xsl"/>')
+        open(source, 'w').write(text)
