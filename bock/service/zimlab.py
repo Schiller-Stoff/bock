@@ -1,6 +1,9 @@
 
 from pathlib import Path
 import os
+import shutil
+import tempfile
+from shutil import copytree, ignore_patterns
 
 class ZIMLab:
   """
@@ -40,3 +43,64 @@ class ZIMLab:
 
     # restore cwd
     os.chdir(cur_cwd)
+
+  @staticmethod
+  def copy_templates_www(project_abbr, clone_loc):
+    """
+    Clones gams-project templates to temp dir. Then copies files to the project folder in your gams-data/apache.
+    Throws AssertionError if .xsl files are already found in target directory.
+    :param project_abbr abbreviation of the gams project used on zim. (zimlab + locla folder) Enforced by convention on ZIM
+    :param clone_loc location to where the files should be cloned to.
+    """
+
+    # create a temporary directory using the context manager
+    with tempfile.TemporaryDirectory() as tmpdirpath:
+      print('created temporary directory: ', tmpdirpath)
+
+      # clone files to temp-dir
+      ZIMLab.clone_project_www("templates", tmpdirpath)
+
+      # copy subdirectory
+      fromDirectory = tmpdirpath + os.sep + "templates"
+      toDirectory = clone_loc + os.sep + project_abbr
+
+      if ZIMLab.check_for_xslfiles(toDirectory): raise AssertionError(f"There are already .xsl files available at: {toDirectory}. If you still want to setup the template files make sure to clean up given directory.")
+
+      # fetch all files + copy
+      for file_name in os.listdir(fromDirectory):
+
+          # skip hidden files and readme.
+          if file_name.startswith("."):
+            continue
+          elif "readme" in file_name.lower():
+            continue
+
+          source = fromDirectory + os.sep + file_name
+          # rename files
+          destination = toDirectory + os.sep + file_name.replace("project", project_abbr)
+
+          if os.path.isfile(source):
+            shutil.copy(source, destination)
+            print('copied file: ', destination)
+
+            # open files and adapt to project setup?
+
+          else:
+            copytree(source, destination)
+            print("copied dir: ", destination)
+
+  
+  @staticmethod
+  def check_for_xslfiles(dir_path: str):
+    """
+    Checks if xsl files are inside given directory. Returns true if available false otherwise.
+    :param dir_path path to be checked.
+    """
+    # throw error if project-files are available? or return boolean
+    file_list = os.listdir(dir_path)
+
+    for file in file_list:
+      if ".xsl" in file:
+        return True
+    
+    return False
