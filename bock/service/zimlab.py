@@ -1,4 +1,5 @@
 
+import glob
 from pathlib import Path
 import os
 import shutil
@@ -63,7 +64,10 @@ class ZIMLab:
 
       # copy from tmp to apache/PROJECT_ABBR
       fromDirectory = tmpdirpath + os.sep + "templates"
-      
+
+      # change files in tmp location
+      ZIMLab._adapt_template_files(fromDirectory, project_abbr)
+
       # fetch all files + copy
       for file_name in os.listdir(fromDirectory):
 
@@ -75,12 +79,12 @@ class ZIMLab:
 
           source = fromDirectory + os.sep + file_name
           # rename files
-          destination = toDirectory + os.sep + file_name.replace("project", project_abbr)
+          destination = toDirectory + os.sep + file_name
 
           if os.path.isfile(source):
             # Move to own method!
             # adapts temp files to specific project setup
-            ZIMLab._adapt_temp_template_files(file_name, source, project_abbr)
+            # ZIMLab._adapt_temp_template_files(file_name, source, project_abbr)
             shutil.copy(source, destination)
             print('Created file: ', destination)
 
@@ -105,19 +109,25 @@ class ZIMLab:
     return False
 
   @staticmethod
-  def _adapt_temp_template_files(file_name: str, source: str, project_abbr: str):
+  def _adapt_template_files(loc_folder: str, project_abbr: str):
     """
-    Changes xslt gams project template files according to project abbreviation. Like renaming file
+    Changes xslt / css / js gams project template files according to project abbreviation. Like renaming file
     (from project-static.xsl to MYABBR-static.xsl) and changing xsl file contents.
-    :param file_name name of file to be changed.
-    :source path of source files
+    :param loc_folder parent folder path of template files.
     :project_abbr convention based project abbreviation of the gams proect
     """
     # open files and adapt to project setup?
-    if "static.xsl" in file_name:
-        text = open(source, 'r').read().replace('<xsl:variable name="projectAbbr">template</xsl:variable>', f'<xsl:variable name="projectAbbr">{project_abbr}</xsl:variable>')
-        open(source, 'w').write(text)
 
-    if ("object.xsl" in file_name) or ("context.xsl" in file_name) or ("search.xsl" in file_name):
-        text = open(source, 'r').read().replace('<xsl:include href="project-static.xsl"/>', f'<xsl:include href="{project_abbr}-static.xsl"/>')
-        open(source, 'w').write(text)
+    for filename in glob.iglob(loc_folder + '**/**', recursive=True):
+      if "static.xsl" in filename:
+        text = open(filename, 'r').read().replace('<xsl:variable name="projectAbbr">template</xsl:variable>', f'<xsl:variable name="projectAbbr">{project_abbr}</xsl:variable>')
+        open(filename, 'w').write(text)
+        os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
+
+      if ("object.xsl" in filename) or ("context.xsl" in filename) or ("search.xsl" in filename):
+        text = open(filename, 'r').read().replace('<xsl:include href="project-static.xsl"/>', f'<xsl:include href="{project_abbr}-static.xsl"/>')
+        open(filename, 'w').write(text)
+        os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
+
+      if "template.css" in filename:
+        os.rename(filename, filename.replace("template.css", f"{project_abbr}.css"))
