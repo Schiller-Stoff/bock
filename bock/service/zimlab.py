@@ -52,6 +52,9 @@ class ZIMLab:
     :param project_abbr abbreviation of the gams project used on zim. (zimlab + locla folder) Enforced by convention on ZIM
     :param clone_loc location to where the files should be cloned to.
     """
+    # destination path of copying
+    toDirectory = clone_loc + os.sep + project_abbr
+    if ZIMLab.check_for_xslfiles(toDirectory): raise AssertionError(f"There are already .xsl files available at: {toDirectory}. If you still want to setup the template files make sure to clean up given directory.")
 
     # create a temporary directory using the context manager
     with tempfile.TemporaryDirectory() as tmpdirpath:
@@ -60,10 +63,7 @@ class ZIMLab:
 
       # copy from tmp to apache/PROJECT_ABBR
       fromDirectory = tmpdirpath + os.sep + "templates"
-      toDirectory = clone_loc + os.sep + project_abbr
-
-      if ZIMLab.check_for_xslfiles(toDirectory): raise AssertionError(f"There are already .xsl files available at: {toDirectory}. If you still want to setup the template files make sure to clean up given directory.")
-
+      
       # fetch all files + copy
       for file_name in os.listdir(fromDirectory):
 
