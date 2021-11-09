@@ -7,6 +7,8 @@ from shutil import copytree
 
 class GamsLocalDocker:
   """
+  Encapsulates all methods related to the local docker environment of the local GAMS.
+  Like access to docker logging etc.
 
   """
 
