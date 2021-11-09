@@ -50,9 +50,9 @@ def all(ctx):
 
 @cli.command()
 @click.pass_context
-def one():
+def one(ctx):
     """
-    
+    Dummy method allowing to choice docker container.
     """
     container_name = click.prompt('Please enter a number', show_choices=True, type=click.Choice(
         choices=GamsLocalDocker.DOCKER_CONTAINER, case_sensitive=False))
