@@ -4,7 +4,7 @@ from pathlib import Path
 from bock.utils.wsl import WSL
 import glob
 
-class GamsLocal:
+class GamsLocalFileService:
     def __init__(self) -> None:
         # will thow NotImplementedError outside wsl.
         self.check_wsl_active()

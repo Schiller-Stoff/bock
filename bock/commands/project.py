@@ -1,6 +1,6 @@
 
 import click
-from bock.service.gams_local import GamsLocal
+from bock.service.GamsLocalFileService import GamsLocalFileService
 from bock.service.zimlab import ZIMLab
 
 # Base Setup
@@ -8,7 +8,7 @@ from bock.service.zimlab import ZIMLab
 # class definition is needed for external data and basic setup here
 class Context:
     def __init__(self):
-        self.gams_local = GamsLocal()
+        self.gfile_service = GamsLocalFileService()
 
 # assign defined context to command initialization.
 @click.group()
@@ -32,17 +32,17 @@ def setup(ctx, project_abbr):
     :param project_abbr ZIM/GAMS project abbreviation as used in zimlab and auth.
   """
   click.echo(f"Initializing project for: {project_abbr}")
-  click.echo(f"Found gams-local root at: {str(ctx.obj.gams_local.gamslocal_path)}")
-  click.echo(f"Found apache dir at: {str(ctx.obj.gams_local.gamslocal_apache)}")
+  click.echo(f"Found gams-local root at: {str(ctx.obj.gfile_service.gamslocal_path)}")
+  click.echo(f"Found apache dir at: {str(ctx.obj.gfile_service.gamslocal_apache)}")
 
   # cloning project from zimlab 
-  GamsLocal.assert_project_abbr(project_abbr)
-  ZIMLab.clone_project_www(project_abbr=project_abbr, clone_loc=str(ctx.obj.gams_local.gamslocal_apache))
-  click.echo(f"Succesfully cloned project {project_abbr} from zimlab to: {str(ctx.obj.gams_local.gamslocal_apache)}")
+  GamsLocalFileService.assert_project_abbr(project_abbr)
+  ZIMLab.clone_project_www(project_abbr=project_abbr, clone_loc=str(ctx.obj.gfile_service.gamslocal_apache))
+  click.echo(f"Succesfully cloned project {project_abbr} from zimlab to: {str(ctx.obj.gfile_service.gamslocal_apache)}")
 
   # copy over gams-templates files.
   if click.confirm("Do you want to copy over gams-project templates files to your project folder? (Will stop if there are already xslt-files inside your local clone)"):
-    ZIMLab.copy_templates_www(project_abbr, str(ctx.obj.gams_local.gamslocal_apache))
+    ZIMLab.copy_templates_www(project_abbr, str(ctx.obj.gfile_service.gamslocal_apache))
 
 @cli.command()
 @click.pass_context
@@ -53,5 +53,5 @@ def repair(ctx):
   Might mess with files in the apache folder.
   """
   if click.confirm('Transform dos line-endings maybe causing problems inside your /apache ?'):
-    ctx.obj.gams_local.dos2unix_apache_folder()
+    ctx.obj.gfile_service.dos2unix_apache_folder()
   

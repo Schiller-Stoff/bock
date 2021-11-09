@@ -4,7 +4,8 @@ import click
 import os
 
 from bock.utils.wsl import WSL
-from bock.service.gams_local import GamsLocal
+from bock.service.GamsLocalFileService import GamsLocalFileService
+
 
 # Base Setup
 #
@@ -22,7 +23,7 @@ def cli(ctx):
     
     click.echo("*Starting gams-local now...")
 
-    gams_local_path = str(GamsLocal().gamslocal_path)
+    gams_local_path = str(GamsLocalFileService().gamslocal_path)
     old_cwd = os.curdir
 
     os.chdir(gams_local_path + os.sep + "gams-docker")

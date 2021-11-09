@@ -1,11 +1,8 @@
 
 import click
-import platform
 
-from click.types import Choice
 from bock.service.GamsLocalDocker import GamsLocalDocker
-from bock.service.gams_local import GamsLocal
-from bock.utils.wsl import WSL
+from bock.service.GamsLocalFileService import GamsLocalFileService
 
 # Base Setup
 #
@@ -14,7 +11,7 @@ from bock.utils.wsl import WSL
 
 class Context:
     def __init__(self):
-        self.gams_local = GamsLocal()
+        self.gfileservice = GamsLocalFileService()
 
 # assign defined context to command initialization.
 
@@ -40,7 +37,7 @@ def all(ctx):
     Copies all relevant log files to .../gams-local/gams-logs/
 
     """
-    gams_local = str(ctx.obj.gams_local.gamslocal_path)
+    gams_local = str(ctx.obj.gfileservice.gamslocal_path)
     path = GamsLocalDocker.grab_logging(gams_local)
 
     click.echo("***\n")
