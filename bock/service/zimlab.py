@@ -120,7 +120,7 @@ class ZIMLab:
 
     for filename in glob.iglob(loc_folder + '**/**', recursive=True):
       if "static.xsl" in filename:
-        text = open(filename, 'r').read().replace('<xsl:variable name="projectAbbr">template</xsl:variable>', f'<xsl:variable name="projectAbbr">{project_abbr}</xsl:variable>')
+        text = open(filename, 'r').read().replace('<xsl:variable name="projectAbbr">templates</xsl:variable>', f'<xsl:variable name="projectAbbr">{project_abbr}</xsl:variable>')
         open(filename, 'w').write(text)
         os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
 
@@ -129,5 +129,5 @@ class ZIMLab:
         open(filename, 'w').write(text)
         os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
 
-      if "template.css" in filename:
+      if "templates.css" in filename:
         os.rename(filename, filename.replace("template.css", f"{project_abbr}.css"))
