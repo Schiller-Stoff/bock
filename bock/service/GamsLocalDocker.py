@@ -44,9 +44,9 @@ class GamsLocalDocker:
         f.write(ret)
         f.close()
 
-        copytree(logs_temp, gams_logspath, dirs_exist_ok=True)
+      # copy file out of tmp
+      copytree(logs_temp, gams_logspath, dirs_exist_ok=True)
     
-
     return gams_logspath
 
       
