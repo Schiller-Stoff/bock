@@ -125,9 +125,9 @@ class ZIMLab:
         os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
 
       if ("object.xsl" in filename) or ("context.xsl" in filename) or ("search.xsl" in filename):
-        text = open(filename, 'r').read().replace('<xsl:include href="project-static.xsl"/>', f'<xsl:include href="{project_abbr}-static.xsl"/>')
+        text = open(filename, 'r').read().replace('<xsl:include href="templates-static.xsl"/>', f'<xsl:include href="{project_abbr}-static.xsl"/>')
         open(filename, 'w').write(text)
-        os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
+        os.rename(filename, filename.replace("templates-", f"{project_abbr}-"))
 
       if "templates.css" in filename:
         os.rename(filename, filename.replace("templates.css", f"{project_abbr}.css"))
