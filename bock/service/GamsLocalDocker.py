@@ -45,11 +45,7 @@ class GamsLocalDocker:
         f.close()
 
         copytree(logs_temp, gams_logspath, dirs_exist_ok=True)
-
-    print("*** \n")
-    print("\n")
-    print("\n")
-    print(f"Copied all gams-local logs to: {gams_logspath}")
+    
 
     return gams_logspath
 
