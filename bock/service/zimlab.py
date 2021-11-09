@@ -130,4 +130,4 @@ class ZIMLab:
         os.rename(filename, filename.replace("project-", f"{project_abbr}-"))
 
       if "templates.css" in filename:
-        os.rename(filename, filename.replace("template.css", f"{project_abbr}.css"))
+        os.rename(filename, filename.replace("templates.css", f"{project_abbr}.css"))
