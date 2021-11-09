@@ -38,7 +38,11 @@ class GamsLocalDocker:
 
       for container in GamsLocalDocker.DOCKER_CONTAINER:
         cmd = f"docker logs {container}"
-        ret = subprocess.check_output(cmd, shell=True, text=True).strip().replace("  ", " ")
+        try:
+          ret = subprocess.check_output(cmd, shell=True, text=True).strip().replace("  ", " ")
+        except subprocess.CalledProcessError as err:
+          print(str(err.stderr))
+          raise SystemError(f"Awaited gams-local container '{container}' not found. Make sure that gams-local is active and running.")
 
         f = open( logs_temp + os.sep + f"{container}.log", "a")
         f.write(ret)
