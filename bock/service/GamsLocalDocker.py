@@ -88,8 +88,23 @@ class GamsLocalDocker:
 
     os.chdir(old_cwd)
 
-  def out_gams_status():
+  @staticmethod
+  def out_gams_status() -> str:
     """
     Prints out all running docker container status via docker command. 
+    :returns outable report about current local gams.
     """
-    subprocess.run(["docker", "container", "ls"])
+
+    report = ""
+    cmd = 'docker container ls'
+    docker_ps_return = subprocess.check_output(cmd, shell=True, text=True).strip().lower()
+    
+    if docker_ps_return.count("\n") == 0:
+      report = "******\nLocal GAMS seems to be stopped.\n******" 
+    else:
+      report = "******\nLocal GAMS seems to be running.\n******"
+
+    report += "\nOriginal report: \n"
+    report += docker_ps_return 
+    
+    return report
