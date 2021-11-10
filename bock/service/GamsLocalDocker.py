@@ -90,7 +90,7 @@ class GamsLocalDocker:
     os.chdir(old_cwd)
 
   @staticmethod
-  def out_gams_status() -> Tuple[bool, str]:
+  def check_gams_status() -> Tuple[bool, str]:
     """
     Prints out all running docker container status via docker command. 
     :returns Boolean if GAMS running AND outable report about current local gams.
