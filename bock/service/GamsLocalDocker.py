@@ -5,6 +5,7 @@ from pathlib import Path
 import tempfile
 import subprocess
 from shutil import copytree
+from typing import Tuple
 
 class GamsLocalDocker:
   """
@@ -89,22 +90,25 @@ class GamsLocalDocker:
     os.chdir(old_cwd)
 
   @staticmethod
-  def out_gams_status() -> str:
+  def out_gams_status() -> Tuple[bool, str]:
     """
     Prints out all running docker container status via docker command. 
-    :returns outable report about current local gams.
+    :returns Boolean if GAMS running AND outable report about current local gams.
     """
 
     report = ""
+    is_running: bool = False
     cmd = 'docker container ls'
     docker_ps_return = subprocess.check_output(cmd, shell=True, text=True).strip().lower()
     
     if docker_ps_return.count("\n") == 0:
       report = "******\nLocal GAMS seems to be stopped.\n******" 
+      is_running = False
     else:
       report = "******\nLocal GAMS seems to be running.\n******"
+      is_running = True
 
     report += "\nOriginal report: \n"
     report += docker_ps_return 
-    
-    return report
+
+    return (is_running, report)
