@@ -15,7 +15,7 @@ class Context:
 @click.group()
 @click.pass_context
 def cli(ctx):
-    """General info about your system (wsl etc.)"""
+    """Commands for getting info about your system (wsl etc.)."""
     ctx.obj = Context()
     pass
 

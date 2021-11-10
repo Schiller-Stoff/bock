@@ -19,7 +19,7 @@ class Context:
 @click.group(invoke_without_command=True)
 @click.pass_context
 def cli(ctx):
-    """Get status report of gams status"""
+    """Get status report of local gams. """
     click.echo("!Getting status report...")
     _ , report = GamsLocalDocker.check_gams_status()
     click.echo(report)

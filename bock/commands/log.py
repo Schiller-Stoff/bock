@@ -19,7 +19,7 @@ class Context:
 @click.group()
 @click.pass_context
 def cli(ctx):
-    """Accessing logs of local GAMS"""
+    """Commands related to logging of local gams."""
     ctx.obj = Context()
     pass
 

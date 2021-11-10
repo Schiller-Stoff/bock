@@ -113,6 +113,7 @@ py -m pip install --upgrade bock
 - packaged as "wheel" (check doc link from before)
 
 ```sh
+# on windows!
 # launch venv first
 # cd into clone
 ./venv/Scripts/activate.bat
@@ -135,6 +136,8 @@ twine check dist/*
 ```sh
 # test on testpypi
 # need to specify testpypi repo
+# username: __token__
+# pw: MYTOKEN
 twine upload dist/* --repository testpypi
 
 # install from testpypi

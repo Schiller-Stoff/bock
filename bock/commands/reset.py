@@ -19,7 +19,7 @@ class Context:
 @click.group(invoke_without_command=True) 
 @click.pass_context
 def cli(ctx):
-    """Reset gams local data (available via Cirilo) """
+    """Reset local gams data (available via Cirilo). """
 
     click.echo("*Trying to stop (if) running gams-local...\n")
     gams_local_path = str(GamsLocalFileService().gamslocal_path)

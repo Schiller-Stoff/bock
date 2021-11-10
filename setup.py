@@ -18,7 +18,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     name='bock',
-    version='0.1.0',
+    version='0.1.1',
     packages=find_packages(exclude=("tests")),
     include_package_date=True,
     install_requires=read_requirements(),

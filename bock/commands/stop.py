@@ -16,7 +16,7 @@ class Context:
 @click.group(invoke_without_command=True) 
 @click.pass_context
 def cli(ctx):
-    """Stop local gams as docker environment"""
+    """Stop local gams as docker environment."""
 
     click.echo("*Stopping gams-local now...")
 
