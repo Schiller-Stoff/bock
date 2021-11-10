@@ -2,6 +2,7 @@
 import subprocess
 import click
 import os
+from bock.service.GamsLocalDocker import GamsLocalDocker
 
 from bock.service.GamsLocalFileService import GamsLocalFileService
 
@@ -21,16 +22,11 @@ def cli(ctx):
 
     click.echo("*Stopping gams-local now...")
 
-    gams_local_path = str(GamsLocalFileService().gamslocal_path)
-    old_cwd = os.curdir
+    GamsLocalDocker.stop_gams(
+        GamsLocalFileService().gamslocal_path
+    )
 
-    os.chdir(gams_local_path + os.sep + "gams-docker")
-    # docker-compose down
-    subprocess.run(["docker-compose", "down"])
-
-    os.chdir(old_cwd)
-
-    click.echo("*gams-local successfully stopped.")
+    click.echo("*gams-local stopping procedure end.")
 # 
 #
 #

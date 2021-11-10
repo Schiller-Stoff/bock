@@ -71,4 +71,19 @@ class GamsLocalDocker:
 
     return gams_dockerpath
 
-      
+  def stop_gams(gams_local_path: Path) -> str:
+    """
+    Stop local gams. Needs to have an adequate docker-compose.yaml in it's current working directory.
+    :param gams_local_path Path representation of gams-docker on the current machine.
+    :returns string of "gams-docker" (docker-compose.yaml lives) path on current machine
+    """
+
+    gams_localpath_str = str(gams_local_path)
+    gams_dockerpath = gams_localpath_str + os.sep + "gams-docker"
+    old_cwd = os.curdir
+
+    os.chdir(gams_dockerpath)
+    # docker-compose down
+    subprocess.run(["docker-compose", "down"])
+
+    os.chdir(old_cwd)
