@@ -1,7 +1,5 @@
 
-import subprocess
 import click
-import os
 from bock.service.GamsLocalDocker import GamsLocalDocker
 
 from bock.service.GamsLocalFileService import GamsLocalFileService
