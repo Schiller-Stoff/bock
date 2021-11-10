@@ -20,7 +20,8 @@ class Context:
 @click.pass_context
 def cli(ctx):
     """Get status report of gams status"""
-    click.echo("*Getting status report...")
-    GamsLocalDocker.out_gams_status()
-    click.echo("*Status report end.")
+    click.echo("!Getting status report...")
+    report = GamsLocalDocker.out_gams_status()
+    click.echo(report)
+    click.echo("!Status report end.")
     
