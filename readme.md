@@ -118,6 +118,8 @@ py -m pip install --upgrade bock
 # cd into clone
 ./venv/Scripts/activate.bat
 
+# then increment version in setup.py according to semantic versioning!
+
 # build python wheel
 py -m build --wheel
 
