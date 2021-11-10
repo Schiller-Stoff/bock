@@ -87,3 +87,9 @@ class GamsLocalDocker:
     subprocess.run(["docker-compose", "down"])
 
     os.chdir(old_cwd)
+
+  def out_gams_status():
+    """
+    Prints out all running docker container status via docker command. 
+    """
+    subprocess.run(["docker", "container", "ls"])
