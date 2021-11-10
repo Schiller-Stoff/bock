@@ -5,6 +5,7 @@ import os
 
 from bock.utils.wsl import WSL
 from bock.service.GamsLocalFileService import GamsLocalFileService
+from bock.service.GamsLocalDocker import GamsLocalDocker
 
 
 # Base Setup
@@ -16,22 +17,18 @@ class Context:
         pass
 
 # will launch command directly
-@click.group(invoke_without_command=True) 
+
+
+@click.group(invoke_without_command=True)
 @click.pass_context
 def cli(ctx):
     """Start local gams as docker environment"""
-    
+
     click.echo("*Starting gams-local now...")
 
-    gams_local_path = str(GamsLocalFileService().gamslocal_path)
-    old_cwd = os.curdir
+    GamsLocalDocker.start_gams(
+        GamsLocalFileService().gamslocal_path
+    )
 
-    os.chdir(gams_local_path + os.sep + "gams-docker")
-    subprocess.run(["docker-compose", "up", "-d"])
-
-    os.chdir(old_cwd)
-
-    click.echo("*gams-local successfully started.")
-# 
-#
-#
+    click.echo("*gams-local end of starting precedure.")
+    
