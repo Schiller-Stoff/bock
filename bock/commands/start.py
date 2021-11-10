@@ -1,7 +1,5 @@
 
-import subprocess
 import click
-import os
 
 from bock.utils.wsl import WSL
 from bock.service.GamsLocalFileService import GamsLocalFileService
