@@ -150,6 +150,24 @@ twine check dist/*
 
 - check docu for api token (test out on testpypi)
 
+
+## Pypi
+
+```sh
+# First build files + create pypi account (if not existing)
+# username: __token__
+# pw: MYTOKEN
+twine upload dist/*
+
+# install from pypi
+pip install bock
+
+
+```
+
+## Testpypi
+
+
 ```sh
 # test on testpypi
 # need to specify testpypi repo
