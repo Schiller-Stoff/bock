@@ -1,10 +1,29 @@
 
-# gamsFrontCLI
+# bock
 
-Very basic cli-tool to help setting up a gams-project on gams4+ from perspective of frontend-development.
+Very basic cli-tool to support local (GAMS4+)[http://gams.uni-graz.at/] project development.
 
 
 ## Quick Start
+
+```sh
+
+# 1. make sure python3 + pip are installed
+pip install bock
+
+
+# 2. restart shell / wsl etc.
+# run bock
+bock
+
+```
+
+## Requirements
+- python 3.10.0?
+- pip installed
+
+
+## Bock development
 
 ### Windows
 
@@ -53,10 +72,6 @@ bock demo testme
 - https://github.com/IVIURRAY/yt-eve
 - https://www.youtube.com/watch?v=Jr4QDJwwj60&ab_channel=SoftwareEngineerHaydn
 
-
-## Requirements
-- python 3.10.0?
-- pip installed
 
 
 ### 1. Install pip (WSL + Ubuntu 20.x LTS)
