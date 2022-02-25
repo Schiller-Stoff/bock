@@ -112,3 +112,19 @@ class GamsLocalDocker:
     report += docker_ps_return 
 
     return (is_running, report)
+
+  @staticmethod
+  def update_gams(gams_local_path: Path):
+    """
+    Updates gams-docker files via running git pull in the gams-docker directory / local clone.
+    :param gams_local_path Path to the user's gams-local
+    """
+    gams_localpath_str = str(gams_local_path)
+    gams_dockerpath = gams_localpath_str + os.sep + "gams-docker"
+
+    old_cwd = os.curdir
+    os.chdir(gams_dockerpath)
+    subprocess.run(["git", "pull"])
+    os.chdir(old_cwd)
+
+    return gams_dockerpath
