@@ -3,6 +3,7 @@
 
 Very basic cli-tool to support local (GAMS4+)[http://gams.uni-graz.at/] project development.
 
+- [Bock on pypi](https://pypi.org/project/bock/)
 
 ## Quick Start
 
@@ -29,6 +30,17 @@ pip install bock --upgrade
 
 
 ```
+
+## Install a specific bock version
+
+
+
+```sh
+# installs bock at version 0.1.2
+pip install bock==0.1.2
+
+```
+
 
 ## Requirements
 - python 3.10.0?
