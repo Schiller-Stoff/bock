@@ -18,6 +18,18 @@ bock
 
 ```
 
+## Update bock
+
+```sh
+# u argument = short for 'upgrade'
+pip install bock -U
+
+# alternative
+pip install bock --upgrade
+
+
+```
+
 ## Requirements
 - python 3.10.0?
 - pip installed
