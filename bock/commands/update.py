@@ -20,7 +20,7 @@ class Context:
 @click.group(invoke_without_command=True)
 @click.pass_context
 def cli(ctx):
-    """Update local GAMS installation. At next start local GAMS will download additionally required files."""
+    """Update local gams installation. At next start local GAMS will download additionally required files."""
 
     click.echo("bock: Updating gams-local now...")
 
