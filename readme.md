@@ -5,8 +5,6 @@ Very basic cli-tool to support local (GAMS4+)[http://gams.uni-graz.at/] project 
 
 - [Bock on pypi](https://pypi.org/project/bock/)
 
-test
-
 ## Quick Start
 
 ```sh
